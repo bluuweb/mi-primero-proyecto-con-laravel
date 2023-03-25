@@ -14,7 +14,16 @@ class ChirpController extends Controller
      */
     public function index(): View
     {
-        return view('chirps.index');
+
+        // dd(Chirp::with('user')->latest()->get());
+
+        // echo '<pre>';
+        // var_dump(Chirp::with('user')->latest()->get());
+        // echo '</pre>';
+
+        return view('chirps.index', [
+            'chirps' => Chirp::with('user')->latest()->get(),
+        ]);
     }
 
     /**
@@ -31,7 +40,7 @@ class ChirpController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'message' => 'required|string|max:255',
+            'message' => 'required|string|max:10',
         ]);
  
         $request->user()->chirps()->create($validated);
