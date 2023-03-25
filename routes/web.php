@@ -45,8 +45,12 @@ Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit'])
     ->name('chirps.edit')
     ->middleware(['auth', 'verified']);
 
-Route::patch('/chirps/{chirp}', [ChirpController::class, 'update']) 
+Route::patch('/chirps/{chirp}', [ChirpController::class, 'update'])
     ->name('chirps.update')
     ->middleware(['auth', 'verified']);
 
-require __DIR__.'/auth.php';
+Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy'])
+    ->name('chirps.destroy')
+    ->middleware(['auth', 'verified']);
+
+require __DIR__ . '/auth.php';
